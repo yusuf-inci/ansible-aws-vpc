@@ -112,7 +112,7 @@
             gateway_id: "{{ igw_out.gateway_id }}"
       register: pubRT_out
 
-    - name: Create new nat gateway and allocate new EIP if a nat gateway does not yet exist in the 
+    - name: Create new nat gateway and allocate new EIP if a nat gateway does not yet exist in the subnet
       ec2_vpc_nat_gateway:
         state: "{{ state }}" 
         subnet_id: "{{ pubsub1_out.subnet.id }}"
@@ -137,4 +137,20 @@
         - dest: 0.0.0.0/0
           gateway_id: "{{ NATGW_out.nat_gateway_id }}"
       register: privRT_out
-      
+
+#  print variables especially ID's in order to store it in a file    
+    - debug:
+        var: "{{ item }}"
+      loop:
+        - vpcout.vpc.id
+        - pubsub1_out.subnet.id
+        - pubsub2_out.subnet.id
+        - pubsub3_out.subnet.id
+        - privsub1_out.subnet.id
+        - privsub2_out.subnet.id
+        - privsub3_out.subnet.id
+        - igw_out.gateway_id
+        - pubRT_out.route_table.id
+        - NATGW_out.nat_gateway_id
+        - privRT_out.route_table.id
+        
