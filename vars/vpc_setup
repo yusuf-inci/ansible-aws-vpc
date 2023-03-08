@@ -23,4 +23,4 @@ state: present
 
 #Bastion Vars
 bastion_ami: ami-0f3c9c466bb525749
-MYIP: 88.244.135.190/32
+MYIP: <IP>/32
